@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>@@title</title>
+  <!--Mobile optimized-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+  <!--Theme color-->
+  <meta name="theme-color" content="#fff">
+  <!--SEO-->
+  <meta name="description" content="описание">
+  <meta name="keywords" content="ключевые слова">
+  <!--The Open Graph protocol-->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:url" content="http://localhost:3000/index.html">
+  <meta property="og:title" content="Название">
+  <meta property="og:image" content="http://localhost:3000/share.jpg">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:description" content="Описание">
+  <meta property="og:site_name" content="Расширенное название">
+  <!--Favicon-->
+  <link rel="shortcut icon" href="favicon.ico?rev=@@hash">
+  <link rel="icon" sizes="16x16" href="favicon.ico?rev=@@hash">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png?rev=@@hash">
+  <!--manifest-->
+  <link rel="manifest" href="manifest.webmanifest">
+  <!--Style-->
+  <link rel="stylesheet" href="libs/css/libs.min.css?rev=@@hash">
+  <link rel="stylesheet" href="css/app.min.css?rev=@@hash">
+  <script>
+    document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/,'js');
+  </script>
+</head>
+<body
+@@if(context.pageClass){ class="@@pageClass"}>
+<noscript><div class="no-js-warning">Для корректной работы сайта <b>включите JavaScript</b> в браузере</div></noscript>
+<!--[if lte IE 9]>
+<div class="browserupgrade"><p>You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p></div> <![endif]-->

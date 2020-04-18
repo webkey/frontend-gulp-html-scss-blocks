@@ -1,0 +1,74 @@
+.bottom-space {
+  margin-bottom: $bottom-space;
+
+  @include below($sm) {
+    margin-bottom: $bottom-space--mob;
+  }
+}
+
+.section-space {
+  margin-bottom: $bottom-section;
+
+  @include below($sm) {
+    margin-bottom: $bottom-section--mob;
+  }
+}
+
+.mark {
+  color: $mark-color;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.push-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nobr {
+  white-space: nowrap;
+}
+
+.hide {
+  display: none !important;
+}
+
+.hide-text {
+  @include hide-text;
+}
+
+.desktop-only {
+  @include below($lg) {
+    display: none;
+  }
+}
+
+.devices-only {
+  @include above($lg) {
+    display: none;
+  }
+}
+
+.mobile-only {
+  @include above($sm) {
+    display: none;
+  }
+}

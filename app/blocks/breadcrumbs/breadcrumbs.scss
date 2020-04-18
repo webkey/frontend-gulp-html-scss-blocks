@@ -1,0 +1,33 @@
+.breadcrumbs {
+  color: $text-color-light;
+  margin-bottom: $bottom-space;
+  transition: transform 0.2s;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.breadcrumbs__list {
+  padding: 0;
+  margin: 0;
+  cursor: default;
+}
+
+.breadcrumbs__item {
+  display: inline;
+  padding-right: 0.6rem;
+  margin: 0;
+
+  &::after {
+    display: inline;
+    content: '•';
+    padding-left: 0.7em;
+  }
+
+  &:last-child {
+    &::after {
+      content: none;
+    }
+  }
+}

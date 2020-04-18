@@ -1,0 +1,564 @@
+@import "variables";
+@import "functions";
+@import "../../../node_modules/mathsass/dist/math";
+@import "../../../node_modules/mathsass/dist/functions/tan";
+
+// Media query
+@mixin retina($pixel-ratio: 1.5, $min-resolution: 144dpi) {
+  @media (-webkit-min-device-pixel-ratio: $pixel-ratio), (min-resolution: $min-resolution) {
+    @content;
+  }
+}
+
+@mixin below($width, $orientation: 'width') {
+  @media screen and (max-#{$orientation}: $width - 1) {
+    @content;
+  }
+}
+
+@mixin above($width, $orientation: 'width') {
+  @media screen and (min-#{$orientation}: $width) {
+    @content;
+  }
+}
+
+@mixin between($min-width, $max-width, $orientation: 'width') {
+  @media screen and (min-#{$orientation}: $min-width) and (max-#{$orientation}: $max-width) {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media (min-width: #{$sm}) {
+    @content;
+  }
+}
+
+@mixin md {
+  @media (min-width: #{$md}) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: #{$lg}) {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media (min-width: #{$xl}) {
+    @content;
+  }
+}
+
+// Antialiased
+@mixin antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+// Clear
+/// @link http://nicolasgallagher.com/micro-clearfix-hack/ Micro Clearfix
+@mixin clear {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Truncate
+@mixin truncate($max-width: 320px) {
+  max-width: $max-width;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+// Block element centering
+@mixin push-auto() {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Proportional Resize
+@mixin ratio($x: 1, $y: 1) {
+  $padding: round-float($y / $x * 100%, 2);
+  padding-top: $padding;
+}
+
+// Reset for inline-block elements
+@mixin clear-spacing {
+  font-size: 0;
+  letter-spacing: -4px;
+}
+
+/// This mixin can be used to set the object-fit:
+/// @include object-fit(contain)
+/// or object-fit and object-position:
+/// @include object-fit(cover, top)
+/// https://www.npmjs.com/package/object-fit-images
+/// Need to add this rules:
+/// display: block
+/// width: 100%
+/// height: 100%
+/// max-width: none
+
+@mixin object-fit($fit: fill, $position: null) {
+  object-fit: $fit;
+  @if $position {
+    object-position: $position;
+    font-family: "object-fit: #{$fit}; object-position: #{$position}";
+  } @else {
+    font-family: "object-fit: #{$fit}";
+  }
+}
+
+// Hide text for screen reader
+@mixin hide-text {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// Input placeholder
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder() {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('::-moz-placeholder') {
+    opacity: 1;
+    @content;
+  }
+
+  @include optional-at-root(':-ms-input-placeholder') {
+    opacity: 1;
+    @content;
+  }
+
+  @include optional-at-root('.placeholder') {
+    @content;
+  }
+}
+
+@mixin placeholder-focus {
+  @include optional-at-root(":focus::-webkit-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":focus:-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":focus::-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":focus:-ms-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(".placeholder:focus") {
+    @content;
+  }
+}
+
+@mixin placeholder-hover {
+  @include optional-at-root(":hover::-webkit-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":hover:-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":hover::-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":hover:-ms-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(".placeholder:hover") {
+    @content;
+  }
+}
+
+@mixin placeholder-active {
+  @include optional-at-root(":active::-webkit-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":active:-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":active::-moz-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(":active:-ms-input-placeholder") {
+    @content;
+  }
+
+  @include optional-at-root(".placeholder:active") {
+    @content;
+  }
+}
+
+// Scroll disabled
+@mixin scroll-blocked {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+// Triangle helper mixin
+/// Create simple triangle arrow
+/// @param {Direction} $direction - Triangle direction, either `top`, `right`, `bottom` or `left`
+/// @param {Color} $color [current color] - Triangle color
+/// @param {Length} $size [1em] - Triangle size
+/// @param {Number} $kef [1em] - Higher-to-base ratio
+
+/// @example scss
+/// .foo::before {
+///   @include triangle(bottom);
+/// }
+
+/// @example css
+/// .foo::before {
+///   width: 0;
+///   height: 0;
+///   z-index: 2;
+///   border-top: 1.5em solid tomato;
+///   border-left: 1em solid transparent;
+///   border-right: 1em solid transparent;
+/// }
+
+@mixin triangle($direction, $color: tomato, $size: 1em, $kef: 1.5) {
+  @if not index(top right bottom left, $direction) {
+    @error "Direction must be either `top`, `right`, `bottom` or `left`.";
+  }
+  width: 0;
+  height: 0;
+  z-index: 2;
+  border-#{opposite-direction($direction)}: round($size * $kef) solid $color;
+  $perpendicular-borders: $size solid transparent;
+  @if $direction == top or $direction == bottom {
+    border-left: $perpendicular-borders;
+    border-right: $perpendicular-borders;
+  } @else if $direction == right or $direction == left {
+    border-bottom: $perpendicular-borders;
+    border-top: $perpendicular-borders;
+  }
+}
+
+// Triangle pretty
+/// Примесь формирует стрелку-треугольник с бордером
+/// Применяется к самому элементу, а стрелка-треугольник формируется из псевдоэлементов ::before, ::after
+/// Необходимо подключить плагин mathsass https://www.npmjs.com/package/mathsass
+/// Примесь требует доработки! Действует с ограничениями!
+/// Для правильной работи необходимо строго придерживаться правил добавления параметров
+///
+/// @param {Direction} $direction                - Направление стрелки-треугольника: `top`, `right`, `bottom` or `left`
+/// @param {Map} $origins-map []                 - Расположение стрелки-треугольника относительно родительского элемента
+///                                                Например: (top: 50%, left: 100%) - по правому краю по центру
+///                                                Задавать значения необходимо придерживая двух правил:
+///                                                1) по первому из значений стрелка-треугольник будет смещена
+///                                                в противоположную сторону на половину ширины основания;
+///                                                2) значений должно быть не больше двух, что логично.
+///                                                Если нужно разместить стрелку внизу по центру, то значения должны быть такими:
+///                                                (right: 50%, bottom: 0) либо (left: 50%, bottom: 0)
+/// @param {Color} $color [brown]                - Цвет стрелки-треугольника
+/// @param {Length} $size-towards [30px]         - Высота стрелки-треугольника с учетом бордера
+///                                                (от основания до вершины указвающей направление)
+/// @param {Length} $size-across [$size-towards] - Ширина стрелки-треугольника с учетом бордера
+///                                               (ширина основания противоположного вершине указвающей направление)
+/// @param {Color} $bd-color [tomato]            - Цвет бордера стрелки-треугольника
+/// @param {Length} $bd-width [2px]              - Цвет бордера стрелки-треугольника
+///
+/// @example Sass - Использование
+///
+/// .foo {
+///   @include triangle-pretty(bottom, (right: 50%, top: 100%), darkolivegreen, 30px, 30px, darkslategray, 3px);
+/// }
+///
+/// @example css - Вывод CSS
+///
+/// .foo::before,
+/// .foo::after{
+///   content: "";
+///   display: block;
+///   position: absolute;
+///   top: 100%;
+///   right: 50%;
+///   pointer-events: none;
+/// }
+/// .foo::before{
+///   z-index: 2;
+///   margin-right: -15px;
+///   border-top: 30px solid darkslategray;
+///   border-left: 15px solid transparent;
+///   border-right: 15px solid transparent;
+/// }
+/// .foo::after{
+///   z-index: 3;
+///   margin-right: -12px;
+///   border-top: 23px solid darkolivegreen;
+///   border-left: 12px solid transparent;
+///   border-right: 12px solid transparent;
+/// }
+
+@mixin triangle-pretty($direction, $origins-map: (), $color: brown, $size-towards: 30px, $size-across: $size-towards, $bd-color: tomato, $bd-width: 2px) {
+  @if not index(top right bottom left, $direction) {
+    @error "Direction must be either `top`, `right`, `bottom` or `left`.";
+  }
+  $unit-size-toward: unit($size-towards);
+  $unit-size-across: unit($size-across);
+  @if $unit-size-across != $unit-size-across {
+    @error "Значение высоты треугольника и его основания должны быть в одинаковых единицах измерения";
+  }
+  // переменные для смещения стрелки-треугольника назад на половину ширины основания
+  $top: null;
+  $right: null;
+  $bottom: null;
+  $left: null;
+  $margin-direct: null;
+  $i: 0;
+  // определение направления и величины смещения
+  @each $origin, $value in $origins-map {
+    @if $i == 0 {
+      $margin-direct: $origin;
+    }
+    $i: $i + 1;
+    @if $origin == top {
+      $top: $value;
+    }
+    @if $origin == right {
+      $right: $value;
+    }
+    @if $origin == bottom {
+      $bottom: $value;
+    }
+    @if $origin == left {
+      $left: $value;
+    }
+  }
+  // вывод общих стилей
+  &::before, &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
+    pointer-events: none;
+  }
+  // вывод стилей большой (внешней) стрелки-треугольника
+  &::before {
+    z-index: 2;
+    @if $margin-direct {
+      margin-#{$margin-direct}: -#{$size-across * 0.5};
+    }
+    border-#{opposite-direction($direction)}: $size-towards solid $bd-color;
+    $perpendicular-borders: round($size-across * 0.5) solid transparent;
+    @if $direction == top or $direction == bottom {
+      border-left: $perpendicular-borders;
+      border-right: $perpendicular-borders;
+    } @else if $direction == right or $direction == left {
+      border-bottom: $perpendicular-borders;
+      border-top: $perpendicular-borders;
+    }
+  }
+  // рассчет маленькой стрелки-треугольника по размеру бордера
+  $tg-angle: 2 * $size-towards / $size-across;
+  $angle: atan($tg-angle);
+  $sin-angle: sin($angle);
+  $height-large: $size-across * $sin-angle;
+  $height-small: $height-large - $bd-width * 2;
+  $small-size-across: $height-small / $sin-angle;
+  $small-size-toward: $small-size-across / 2 * $tg-angle;
+  // вывод стилей маленькой (внутренней) стрелки-треугольника
+  &::after {
+    z-index: 3;
+    @if $margin-direct {
+      margin-#{$margin-direct}: -(round($small-size-across * 0.5));
+    }
+    border-#{opposite-direction($direction)}: round($small-size-toward) solid $color;
+    $perpendicular-borders: round($small-size-across * 0.5) solid transparent;
+    @if $direction == top or $direction == bottom {
+      border-left: $perpendicular-borders;
+      border-right: $perpendicular-borders;
+    } @else if $direction == right or $direction == left {
+      border-bottom: $perpendicular-borders;
+      border-top: $perpendicular-borders;
+    }
+  }
+}
+
+// Leaner gradient
+/// Convert angle
+/// @author Chris Eppstein
+/// @param {Number} $value - Value to convert
+/// @param {String} $unit - Unit to convert to
+/// @return {Number} Converted angle
+///
+@function convert-angle($value, $unit) {
+  $convertable-units: deg grad turn rad;
+  $conversion-factors: 1 10grad / 9deg 1turn / 360deg 3.14159rad / 180deg;
+  @if index($convertable-units, unit($value)) and index($convertable-units, $unit) {
+    @return $value / nth($conversion-factors, index($convertable-units, unit($value))) * nth($conversion-factors, index($convertable-units, $unit));
+  }
+  @warn "Cannot convert `#{unit($value)}` to `#{$unit}`.";
+}
+
+/// Test if `$value` is an angle
+/// @param {*} $value - Value to test
+/// @return {Bool}
+///
+@function is-direction($value) {
+  $is-direction: index((to top, to top right, to right top, to right, to bottom right, to right bottom, to bottom, to bottom left, to left bottom, to left, to left top, to top left), $value);
+  $is-angle: type-of($value) == "number" and index("deg" "grad" "turn" "rad", unit($value));
+  @return $is-direction or $is-angle;
+}
+
+/// Convert a direction to legacy syntax
+/// @param {Keyword | Angle} $value - Value to convert
+/// @require {function} is-direction
+/// @require {function} convert-angle
+@function legacy-direction($value) {
+  @if is-direction($value) == false {
+    @warn "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be an angle or a direction";
+  }
+  $conversion-map: (to top: bottom, to top right: bottom left, to right top: left bottom, to right: left, to bottom right: top left, to right bottom: left top, to bottom: top, to bottom left: top right, to left bottom: right top, to left: right, to left top: right bottom, to top left: bottom right);
+  @if map-has-key($conversion-map, $value) {
+    @return map-get($conversion-map, $value);
+  }
+  @return 90deg - convert-angle($value, "deg");
+}
+
+/// Mixin printing a linear-gradient
+/// @example
+/// @include linear-gradient(red, blue)
+/// @include linear-gradient(to right, red 0%, blue 50%, green 100%)
+/// @include linear-gradient(42deg, red 0%, blue 50%, green 100%)
+@mixin linear-gradient($direction, $color-stops...) {
+  @if is-direction($direction) == false {
+    $color-stops: $direction, $color-stops;
+    $direction: 180deg;
+  }
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}
+
+
+
+// Font Face Generator
+/// @example scss
+/// @include font-face("candara", "../fonts/candara/regular/candara", normal, normal, eot woff ttf svg)
+///
+/// @example css
+/// @font-face{
+///   font-family: "название-шрифта";
+///   font-style: normal;
+///   font-weight: normal;
+///   src: url("../fonts/candara/regular/candara.eot?") format("eot"), url("../fonts/candara/regular/candara.woff") format("woff"), url("../fonts/candara/regular/candara.ttf") format("truetype"), url("../fonts/candara/regular/candara.svg#candara-regular") format("svg");
+/// }
+
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+  @return $string;
+}
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+  $src: null;
+  $extmods: (eot: "?", svg: "#" + str-replace($name, " ", "_"));
+  $formats: (otf: "opentype", ttf: "truetype");
+  @each $ext in $exts {
+    $extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+    $format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+    $src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+  }
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+// For Print Version
+@mixin print-reset {
+  //display: block !important;
+  float: none !important;
+  position: relative !important;
+  overflow: visible !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  left: auto !important;
+  top: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  transform: none !important;
+  text-align: left !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  z-index: auto !important;
+}
+
+@mixin prints-space-bottom-sm {
+  margin-top: 0 !important;
+  margin-bottom: 0.5cm !important;
+  padding-bottom: 0 !important;
+}
+
+@mixin prints-space-bottom-md {
+  margin-top: 0 !important;
+  margin-bottom: 1cm !important;
+  padding-bottom: 0 !important;
+}
+
+@mixin prints-space-bottom-lg {
+  margin-bottom: 1.5cm !important;
+  padding-bottom: 0 !important;
+}

@@ -1,0 +1,59 @@
+.footer {
+  position: relative;
+
+  //z-index: 5
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-color: rgba(lightgreen, 0.8);
+}
+
+.footer-bottom {
+  $space-h: round-float(nth($grid-space, 2) / 2, 1);
+  $space-v: round-float(nth($grid-space, 1) / 2, 1);
+  position: relative;
+
+  // обрезать вытянутый маржинами по горизонтале дочерний элемент
+  overflow: hidden;
+
+  &__holder {
+
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -#{$space-h} -#{$space-v};
+  }
+
+  &__col {
+    text-align: center;
+
+    padding-left: $space-h;
+    padding-right: $space-h;
+    margin-bottom: $space-v;
+
+    @include below($sm) {
+      min-width: 100%;
+    }
+
+    &:first-child {
+      @include above($sm) {
+        text-align: left;
+      }
+    }
+
+    &:last-child {
+      @include above($sm) {
+        text-align: right;
+      }
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+
+      .no-touchevents &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

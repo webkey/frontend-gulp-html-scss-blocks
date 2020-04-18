@@ -1,0 +1,50 @@
+.nav {
+  position: relative;
+}
+
+.nav__list {
+  margin: 0;
+  padding: 0;
+  @include clear;
+
+  li {
+    position: relative;
+  }
+
+  // Первый уровень
+  & > li {
+    float: left;
+    margin-right: 2rem;
+  }
+}
+
+// Submenu
+.nav__list {
+  li > ul {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    background-color: white;
+    border: 1px solid $border-color;
+    padding: 2rem;
+    width: $layout-page-min-width;
+    z-index: 10;
+
+    display: none;
+
+    li {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      line-height: 1.5;
+    }
+
+    ul {
+      top: 0;
+      left: 100%;
+    }
+  }
+
+  li:hover > ul {
+    display: block;
+  }
+}

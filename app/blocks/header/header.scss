@@ -1,0 +1,28 @@
+.header {
+  background-color: rgba(lightgreen, 0.8);
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.logo {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  width: 85px;
+  height: 85px;
+  margin: 0 2rem 0 0;
+  background: url(../images/logo.svg) no-repeat;
+  background-size: contain;
+  text-indent: -9999px;
+  z-index: 5;
+
+  a, & > span {
+    display: block;
+    height: 100%;
+  }
+}

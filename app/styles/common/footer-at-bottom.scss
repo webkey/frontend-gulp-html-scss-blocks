@@ -1,0 +1,23 @@
+/* footer at bottom */
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.header,
+.main,
+.footer {
+  flex-shrink: 0;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+/* footer at bottom end */
