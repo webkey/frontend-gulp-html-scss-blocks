@@ -6,7 +6,7 @@
     "start": "gulp default",
     "production": "gulp production",
     "clean": "gulp cleanDist",
-    "clear": "gulp clearCache",
+    "clear-cache": "gulp clearCache",
     "lint:scripts": "gulp scripts:lint",
     "lint:styles": "gulp styles:lint",
     "lint": "npm-run-all -p lint:*",
