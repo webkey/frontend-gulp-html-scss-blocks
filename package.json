@@ -1,7 +1,7 @@
 {
-  "name": "frontend-gulp-html-scss",
+  "name": "frontend-gulp-html-scss-blocks",
   "version": "0.1.0",
-  "description": "Frontend template without modules",
+  "description": "Frontend template with Logical blocks",
   "scripts": {
     "start": "gulp default",
     "production": "gulp production",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:webkey/frontend-gulp-html-scss.git"
+    "url": "git@github.com:webkey/frontend-gulp-html-scss-blocks.git"
   },
   "author": "Serhiy Ilchenko <serhiy.ilchenko@gmail.com>",
   "license": "MIT",
