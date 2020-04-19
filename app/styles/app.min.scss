@@ -1,6 +1,6 @@
-@import 'utils/variables';
-@import 'utils/functions';
-@import 'utils/mixins';
+@import 'common/variables';
+@import 'common/functions';
+@import 'common/mixins';
 // FONTS
 @import 'common/fonts';
 // NORMALIZE
@@ -13,4 +13,4 @@
 @import 'common/no-js';
 @import '../blocks/**/*';
 // PRINT VERSION
-//@import 'print/print';
+//@import 'common/print';

@@ -44,6 +44,9 @@ npm run lint
 │   │   └── app.js                    # Main scripts
 │   ├── styles/                       # Styles
 │   │   ├── common/                   # Common styles
+│   │   │   ├── _functions.scss       # Functions
+│   │   │   ├── _mixins.scss          # Mixines
+│   │   │   ├── _variables.scss       # Variables
 │   │   │   ├── common.scss           # Common
 │   │   │   ├── fonts.scss            # Fonts
 │   │   │   ├── footer-at-bottom.scss # Press footer to bottom of page
@@ -51,13 +54,7 @@ npm run lint
 │   │   │   ├── no-js.scss            # No js note
 │   │   │   ├── normalize.scss        # Normalize
 │   │   │   ├── old-ie.scss           # Old IE note
-│   │   │   └── mixins.scss           # Mixines
-│   │   ├── print/                    # Print styles
 │   │   │   └── print.scss            # Print
-│   │   ├── utils/                    # Units
-│   │   │   ├── _functions.scss       # Functions
-│   │   │   ├── _mixins.scss          # Mixines
-│   │   │   └── _variables.scss       # Variables
 │   │   └── app.min.scss              # Main styles
 │   └── some.html                     # Html page
 ├── .eslintrc                         # Конфигурация проверки JavaScript в ESLint

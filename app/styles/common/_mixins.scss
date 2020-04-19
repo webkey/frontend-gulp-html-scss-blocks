@@ -1,7 +1,7 @@
 @import "variables";
 @import "functions";
-@import "../../../node_modules/mathsass/dist/math";
-@import "../../../node_modules/mathsass/dist/functions/tan";
+@import "node_modules/mathsass/dist/math";
+@import "node_modules/mathsass/dist/functions/tan";
 
 // Media query
 @mixin retina($pixel-ratio: 1.5, $min-resolution: 144dpi) {
