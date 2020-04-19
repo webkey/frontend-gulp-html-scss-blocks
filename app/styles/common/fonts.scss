@@ -1,14 +1,18 @@
-@import "app/styles/utils/mixins";
-
 // =============================================================================
 // Google Fonts
 // =============================================================================
-//@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,400i,700,700i&subset=cyrillic');
+// @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:400,400i,700,700i&subset=cyrillic');
 
 // =============================================================================
 // Font Face
 // =============================================================================
-//@include font-face("candara-regular", "../fonts/candara/regular/candara", normal, normal, eot woff ttf svg);
-//@include font-face("candara-bold", "../fonts/candara/bold/candarab", normal, normal, eot woff ttf svg);
-//@include font-face("candara-italic", "../fonts/candara/italic/candarai", normal, normal, eot woff ttf svg);
-//@include font-face("candara-bold-italic", "../fonts/candara/bold-italic/candaraz", normal, normal, eot woff ttf svg);
+// Fonts generators:
+// 1) https://transfonter.org/
+// 2) https://www.fontsquirrel.com/
+// Fonts folder:
+// app/resources/fonts/
+// Example:
+// @include font-face("candara", "../fonts/candara/candara-regular", normal, normal, eot woff ttf svg);
+// @include font-face("candara", "../fonts/candara/candara-bold", bold, normal, eot woff ttf svg);
+// @include font-face("candara", "../fonts/candara/candara-italic", normal, italic, eot woff ttf svg);
+// @include font-face("candara", "../fonts/candara/candara-bold-italic", bold, italic, eot woff ttf svg);
