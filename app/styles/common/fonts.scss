@@ -6,13 +6,13 @@
 // =============================================================================
 // Font Face
 // =============================================================================
-// Fonts generators:
+// 1. Use a fonts generators:
 // 1) https://transfonter.org/
 // 2) https://www.fontsquirrel.com/
-// Fonts folder:
+// 2. Add your generated fonts to a folder:
 // app/resources/fonts/
-// Example:
-// @include font-face("candara", "../fonts/candara/candara-regular", normal, normal, eot woff ttf svg);
-// @include font-face("candara", "../fonts/candara/candara-bold", bold, normal, eot woff ttf svg);
-// @include font-face("candara", "../fonts/candara/candara-italic", normal, italic, eot woff ttf svg);
-// @include font-face("candara", "../fonts/candara/candara-bold-italic", bold, italic, eot woff ttf svg);
+// 3. Use a 'font-face' mix to connect your generated fonts::
+// @include font-face('candara', '../fonts/candara/candara-regular', normal, normal, eot woff ttf svg); // Regular
+// @include font-face('candara', '../fonts/candara/candara-bold', bold, normal, eot woff ttf svg); // Bold
+// @include font-face('candara', '../fonts/candara/candara-italic', normal, italic, eot woff ttf svg); // Italic
+// @include font-face('candara', '../fonts/candara/candara-bold-italic', bold, italic, eot woff ttf svg); // Bold-italic
